@@ -28,7 +28,7 @@ public class ReservationService {
         return reservationRepository.findAll()
                 .stream()
                 .map(reservation -> mapToDTO(reservation, new ReservationDTO()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public ReservationDTO get(final UUID id) {
@@ -62,8 +62,8 @@ public class ReservationService {
         reservationDTO.setOcupationEndTime(reservation.getOcupationEndTime());
         reservationDTO.setCreatedBy(reservation.getCreatedBy());
         reservationDTO.setReservationUsers(reservation.getReservationUserUsers() == null ? null : reservation.getReservationUserUsers().stream()
-                .map(user -> user.getId())
-                .collect(Collectors.toList()));
+                .map(User::getId)
+                .toList());
         return reservationDTO;
     }
 
